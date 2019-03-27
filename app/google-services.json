@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "531731659961",
+    "firebase_url": "https://filemanager-7fbd2.firebaseio.com",
+    "project_id": "filemanager-7fbd2",
+    "storage_bucket": "filemanager-7fbd2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531731659961:android:66ab774934998083",
+        "android_client_info": {
+          "package_name": "com.example.mylenovo.filemanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531731659961-c7skmgiv6ebvlhc4feaeumh3nmm4cvmv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mylenovo.filemanager",
+            "certificate_hash": "8f94a9d965e08bc50d1aff3d08d707c129dff6c9"
+          }
+        },
+        {
+          "client_id": "531731659961-u4po7daui9djj28m5ig6kgpfnrjpndle.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjADNfNE4qIQ64ooqg86JBQIBvrbpdthg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531731659961-u4po7daui9djj28m5ig6kgpfnrjpndle.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
