@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(), "Log in successful", Toast.LENGTH_SHORT).show();
             finish();
-            Intent intent = new Intent(getApplicationContext(), Main3Activity.class);
+            Intent intent = new Intent(getApplicationContext(),   Main3Activity.class);
             startActivity(intent);
         }
         /*else if(passwd==null)
