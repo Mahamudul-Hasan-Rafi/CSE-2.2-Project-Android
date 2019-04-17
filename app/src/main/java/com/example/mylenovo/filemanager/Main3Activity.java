@@ -30,27 +30,46 @@ public class Main3Activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String value = topics[position];
 
-                Intent myFile = new Intent(Intent.ACTION_GET_CONTENT);
+                //Intent myFile = new Intent(Intent.ACTION_GET_CONTENT);
 
-                if(value.equals("Downloads"))
-                    myFile.setType("*/*");
+                //if(value.equals("Downloads"))
+                   // myFile.setType("*/*");
 
-                else if(value.equals("Images"))
-                    myFile.setType("image/*");
+                if(value.equals("Images")) {
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), ImageAcyivity.class));
+                }
 
                 else if(value.equals("Videos"))
-                    myFile.setType("video/*");
+                {
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), VideoActivity.class));
+                }
+                  //  myFile.setType("video/*");
 
                 else if(value.equals("Audios"))
-                    myFile.setType("audio/*");
+                {
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), MusicActivity.class));
+                }
 
-                else if(value.equals("Documents"))
-                    myFile.setType("application/pdf");
+
+                else if(value.equals("Documents")) {
+
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), DocumentActivity.class));
+                }
+
+                else if(value.equals("Storage"))
+                {
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), StorageActivity.class));
+                }
 
 
-                myFile.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                //myFile.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
 
-                startActivity(myFile);
+                //startActivity(myFile);
             }
         });
 

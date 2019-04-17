@@ -5,7 +5,14 @@
         <item>Videos</item>
         <item>Audios</item>
         <item>Documents</item>
-        <item>Downloads</item>
+        <item>Storage</item>
+    </string-array>
+    <string-array name="documents">
+        <item>PDF</item>
+        <item>Word</item>
+        <item>PPT</item>
+        <item>Excel</item>
+        <item>Text</item>
     </string-array>
     <string name="edit5">Username</string>
     <string name="edit3">Password</string>

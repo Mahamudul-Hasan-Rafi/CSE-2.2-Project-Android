@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ebf1c3"
-    tools:context=".Main3Activity">
+    tools:context=".MainActivity">
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="#978c8c"
-        android:dividerHeight="2dp"
-        android:listSelector="#8e8748"
+        android:divider="#3d2020"
+        android:dividerHeight="1dp"
         >
 
     </ListView>
+
 
 </LinearLayout>

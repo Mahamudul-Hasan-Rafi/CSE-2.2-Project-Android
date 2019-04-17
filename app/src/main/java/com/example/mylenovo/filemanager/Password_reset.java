@@ -9,58 +9,89 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 
 public class Password_reset extends AppCompatActivity {
 
-    private EditText email;
+    private EditText ans;
     private Button reset;
-    private FirebaseAuth firebaseAuth;
+    String st, name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_reset);
 
-        setUIView();
-        firebaseAuth = FirebaseAuth.getInstance();
+        //setUIView();
+        st = readFromFile();
+        Toast.makeText(this, st, Toast.LENGTH_SHORT);
+
+
+        ans = (EditText)findViewById(R.id.ans);
+        reset = (Button)findViewById(R.id.reset);
+
+        name = ans.getText().toString();
+
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uemail = email.getText().toString();
-
-                if(uemail.equals(" "))
-                {
-                    Toast.makeText(getApplicationContext(), "Please enter your email", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    firebaseAuth.sendPasswordResetEmail(uemail).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful())
-                            {
-                                Toast.makeText(getApplicationContext(),"Password reset email sent!!", Toast.LENGTH_SHORT).show();
-                                finish();
-                                startActivity(new Intent(Password_reset.this, MainActivity.class));
-                            }
-                            else
-                            {
-                                Toast.makeText(getApplicationContext(),"Error in password reset", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
+                validate();
             }
         });
     }
+    private void validate() {
+        // String name = userName.getText().toString();
+        name = ans.getText().toString();
 
-    private void setUIView()
+        if (st == null)
+            Toast.makeText(this, "No ans", Toast.LENGTH_SHORT).show();
+        else {
+            if (st.equals(name)) {
+                finish();
+                Intent intent = new Intent(getApplicationContext(), AccountCreate.class);
+                startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(this, "Incorrect answer", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    public String readFromFile()
     {
-        email = (EditText)findViewById(R.id.email);
-        reset = (Button)findViewById(R.id.reset);
+
+        //Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
+
+        String strr=null;
+        try {
+            FileInputStream fin = openFileInput("User2.txt");
+            InputStreamReader ipr = new InputStreamReader(fin);
+            BufferedReader bfr = new BufferedReader(ipr);
+
+            String line;
+            StringBuffer stbr = new StringBuffer();
+
+            while ((line = bfr.readLine()) != null) {
+                stbr.append(line);
+            }
+            strr = stbr.toString();
+            Toast.makeText(getApplicationContext(), strr, Toast.LENGTH_SHORT).show();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return strr;
     }
 
     public void onBackPressed() {

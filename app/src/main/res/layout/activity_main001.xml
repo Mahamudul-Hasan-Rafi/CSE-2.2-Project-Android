@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#7f8763"
+    >
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="220px"
+        android:layout_height="220px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="false"
+        android:layout_marginBottom="90dp"
+        android:src="@drawable/f_mg" />
+
+    <EditText
+        android:id="@+id/editText9"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginLeft="1000dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+
+        android:layout_marginBottom="50dp"
+        android:background="#9f9d9d"
+        android:drawableLeft="@drawable/ic_lock_black_20dp"
+        android:ems="10"
+        android:hint=" Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/button_background1"
+        android:text="Login" />
+
+
+
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="40dp"
+            android:textColor="#020202"
+            android:text="Forgot Password"
+
+            />
+
+
+
+    </LinearLayout>
+

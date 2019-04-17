@@ -16,16 +16,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class AccountCreate extends AppCompatActivity {
 
@@ -33,22 +30,21 @@ public class AccountCreate extends AppCompatActivity {
     private TextView text;
     private long backpressedTime;
 
-    private EditText email;
+    //private EditText email;
     private EditText username;
     private EditText password;
     private EditText confirm;
     private ProgressBar progressBar;
 
-    private FirebaseAuth mAuth;
-    private DatabaseReference database;
+
     private String uname, upass, uemail;
+    String read;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_create);
         setupUIView();
-        mAuth = FirebaseAuth.getInstance();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +52,7 @@ public class AccountCreate extends AppCompatActivity {
                 boolean result=validate();
 
               if(result) {
-                  mAuth.createUserWithEmailAndPassword(uemail, upass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                  /*mAuth.createUserWithEmailAndPassword(uemail, upass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                       @Override
                       public void onComplete(@NonNull Task<AuthResult> task) {
                           if (task.isSuccessful()) {
@@ -74,9 +70,15 @@ public class AccountCreate extends AppCompatActivity {
                               Toast.makeText(getApplicationContext(), "Account create failed", Toast.LENGTH_SHORT).show();
                           }
                       }
-                  });
+                  });*/
+
+                  writeToFile(upass, uname);
+
+                  Toast.makeText(getApplicationContext(), "Password saved", Toast.LENGTH_SHORT).show();
+                  finish();
+                  startActivity(new Intent(AccountCreate.this, MainActivity.class));
               }
-                writeToFile(uname, upass);
+
 
             }
         });
@@ -84,44 +86,37 @@ public class AccountCreate extends AppCompatActivity {
 
     protected void setupUIView()
     {
-        email = (EditText) findViewById(R.id.editText3);
-        username = (EditText) findViewById(R.id.editText4);
-        password = (EditText) findViewById(R.id.editText5);
-        confirm = (EditText) findViewById(R.id.editText6);
+        //email = (EditText) findViewById(R.id.editText3);
+        username = (EditText) findViewById(R.id.editText3);
+        password = (EditText) findViewById(R.id.editText4);
+        confirm = (EditText) findViewById(R.id.editText5);
 
         button = (Button) findViewById(R.id.button);
 
         //progressBar = (ProgressBar)findViewById(R.id.prgs_bar);
     }
 
-    public void onBackPressed() {
+    /*public void onBackPressed() {
         finish();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-    }
+    }*/
     boolean validate()
     {
         boolean result = false;
 
-        uemail = email.getText().toString();
+        //uemail = email.getText().toString();
         uname = username.getText().toString();
         upass = password.getText().toString();
         String uconf = confirm.getText().toString();
 
-        if(uemail.isEmpty())
+        if(uname.isEmpty())
         {
-            email.setError("Enter email address");
-            email.requestFocus();
+            username.setError("Enter username");
+            username.requestFocus();
             return result;
         }
-        else if(!Patterns.EMAIL_ADDRESS.matcher(uemail).matches())
-        {
-            email.setError("Enter a valid email address");
-            email.requestFocus();
-            return result;
-        }
-
-        else if(upass.isEmpty())
+        if(upass.isEmpty())
         {
             password.setError("Enter password");
             password.requestFocus();
@@ -135,9 +130,9 @@ public class AccountCreate extends AppCompatActivity {
             return result;
         }
 
-        else if(upass.length()<6)
+        else if(upass.length()<4)
         {
-            password.setError("Length of password must be minimum 6");
+            password.setError("Length of password must be minimum 4");
             password.requestFocus();
             return result;
         }
@@ -157,11 +152,14 @@ public class AccountCreate extends AppCompatActivity {
         }
     }
 
-    void  writeToFile(String uName, String uPass)
+    void  writeToFile(String uPass, String uname)
     {
         try {
-            FileOutputStream f_out = openFileOutput(uName+".txt", Context.MODE_PRIVATE);
+            FileOutputStream f_out = openFileOutput("User.txt", Context.MODE_PRIVATE);
+            FileOutputStream f_ot = openFileOutput("User2.txt", Context.MODE_PRIVATE);
+
             f_out.write(uPass.getBytes());
+            f_ot.write(uname.getBytes());
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -171,14 +169,11 @@ public class AccountCreate extends AppCompatActivity {
         }
     }
 
-    /*private void sendData()
-    {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference(mAuth.getUid());
 
-        UserProfile userProfile = new UserProfile(uemail, uname, upass );
-        myRef.setValue(userProfile);
-    }*/
+    public void onBackPressed()
+    {
+
+    }
 
 }
 
